@@ -1,0 +1,39 @@
+-------------------------------------------------------------------------------
+README FOR REDIS READER WRITER LOCK
+-------------------------------------------------------------------------------
+This is a  reader writer lock implementetion for a file shared over nfs.
+In this implementetion 
+lockShared and unlockShared is used by readers to acquire and release lock. 
+    It allows multiple readers to access the file at same time.
+lockExclusive and unlockExclusive is used by writer to acquire and release lock.
+    It does not allows multiple writers to access the file at same time.
+
+
+=============
+Prerequisites
+=============
+gcc, hiredis, libevent
+
+
+=================
+Running the test
+=================
+To run the code you’ll need to mount a common share on "/mnt/".
+To complie code
+    Execute: "gcc redis_read_write.c -lhiredis -w -levent_core -lpthread"
+
+To test reader-writer lock each node does operation and then sleeps for a 
+specific amount of time. Each node does 10 iterations of its task. 
+I’ve reduced sleep duration to keep recording short.
+    node0 does read and then sleeps for 8 seconds.
+    node1 does read and sleeps for 5 seconds.
+    node2 and node 3 do write and sleeps for 5 seconds.
+
+While executing ./a.out you’ll need to pass node number (0,1,2,3) to them like
+“./a.out 1”.
+
+====================================================
+For any further queries ping me at prakersh@live.com
+====================================================
+
+
